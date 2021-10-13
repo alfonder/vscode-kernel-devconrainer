@@ -1,0 +1,32 @@
+{
+	"name": "Ubuntu",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "hirsute"
+		}
+	},
+	"runArgs": [
+		"--cap-add=ALL",
+		"--privileged",
+		// "--network=host"
+	],
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "/bin/bash"
+			}
+		}
+	},
+	"workspaceMount": "source=${localWorkspaceFolderBasename},target=/workspaces,type=volume",
+	"workspaceFolder": "/workspaces",
+	"mounts": [
+		// 	"source=vsc-linux-yadro-rootfs,target=${containerWorkspaceFolder}/rootfs,type=volume"
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind",
+		"source=${localWorkspaceFolder},target=/repo,type=bind",
+		"source=${localWorkspaceFolder}/out,target=/out,type=bind",
+	],
+	// "postCreateCommand": "sudo chown -R vscode /workspaces",
+	"extensions": [],
+	"remoteUser": "vscode"
+}
